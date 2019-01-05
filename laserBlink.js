@@ -1,6 +1,6 @@
 'use strict';
 const Gpio = require('onoff').Gpio;
-const laser = new Gpio(4, 'out');
+const laser = new Gpio(17, 'out');
 const lasterInterval = setInterval(blinkLaser, 250);
 
 function blinkLaser() {

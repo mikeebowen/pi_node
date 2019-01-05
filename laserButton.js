@@ -1,8 +1,8 @@
 'use strict';
 
 const Gpio = require('onoff').Gpio;
-const laser  = new Gpio(4, 'out');
-const button = new Gpio(17, 'in', 'both');
+const laser  = new Gpio(17, 'out');
+const button = new Gpio(4, 'in', 'both', {debounceTimeout: 10});
 let laserOn = 0;
 
 button.watch((err, val) => {
@@ -11,7 +11,8 @@ button.watch((err, val) => {
     return;
   }
   laserOn = laserOn ? 0 : 1;
-
+  console.log('laserOn: ', laserOn);
+  console.log('val: ', val);
   laser.writeSync(laserOn);
 
 });
