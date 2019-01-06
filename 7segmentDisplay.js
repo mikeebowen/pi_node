@@ -91,7 +91,9 @@ function showAlphabet(l, i) {
           showAlphabet(nextLetter, 0);          
         }, 250);
       } else {
-        cleanUp();
+        setTimeout(() => {
+          cleanUp();          
+        }, 250);
       }
     }
   });
