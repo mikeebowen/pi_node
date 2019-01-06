@@ -118,6 +118,13 @@ function showLetter(l, i) {
     i += 1;
     if (i < lights.length) {
       showLetter(l, i);
+    } else {
+      const keys = Object.keys(letters);
+      const nextIndex = keys.indexOf(l) +1;
+      if (nextIndex < letters.length) {
+        const nextLetter = keys[nextIndex];
+        showLetter(nextLetter, 0);
+      }
     }
   });
 }
