@@ -104,7 +104,9 @@ function cleanUp() {
 // cycleLed(0);
 // cycleLedAsync(0);
 // showAlphabet();
-showAlphabet('a', 0);
-setTimeout(() => {
-  cleanUp();
-}, 30000);
+// showAlphabet('a', 0);
+// setTimeout(() => {
+//   cleanUp();
+// }, 30000);
+Promise.resolve(showAlphabet('a', 0))
+  .then(() => cleanUp());
