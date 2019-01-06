@@ -106,6 +106,8 @@ function cleanUp() {
 }
 
 // cycleLed(0);
-Promise.resolve(cycleLedAsync(0))
-  .then(() => showAlphabet())
-  .then(() => cleanUp());
+cycleLedAsync(0);
+showAlphabet();
+setTimeout(() => {
+  cleanUp();
+}, 30000);
