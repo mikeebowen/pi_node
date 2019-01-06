@@ -93,7 +93,7 @@ function showLetter(l, i) {
 }
 
 function showAlphabet() {
-  showLetter('a');
+  showLetter('a', 0);
 }
 
 function cleanUp() {
