@@ -31,7 +31,28 @@ function cycleLed(i) {
   }, 1000);
 }
 
-cycleLed(0);
+function cycleLedAsync(i) {
+  lights[i].write(1, err => {
+    if (err) {
+      console.error(err);
+    }
+    setTimeout(() => {
+      lights[i].write(0, err => {
+        if (err) {
+          console.error(err);
+        }
+
+        i += 1;
+        if (i < lights.length) {
+          cycleLedAsync(i);
+        }
+      });
+    }, 1000);
+  });
+}
+
+// cycleLed(0);
+cycleLedAsync(0);
 
 setTimeout(() => {
   lights.forEach(x => {
