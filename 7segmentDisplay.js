@@ -53,7 +53,7 @@ function cycleLed(i) {
   }, 1000);
 }
 
-function cycleLedAsync(i) {
+function cycleLedAsync(i, next, args) {
   lights[i].write(1, err => {
     if (err) {
       console.error(err);
@@ -67,33 +67,34 @@ function cycleLedAsync(i) {
         i += 1;
         if (i < lights.length) {
           cycleLedAsync(i);
+        } else if (next && typeof next === 'function') {
+          next(...args);
         }
       });
     }, 500);
   });
 }
 
-function showAlphabet(l, i) {
-  return new Promise((resolve, reject) => {
-
-    lights[i].write(letters[l][i], err => {
-      if (err) {
-        reject(err);
-      }
-      i += 1;
-      if (i < lights.length) {
-        resolve(showAlphabet(l, i));
-      } else {
-        const keys = Object.keys(letters);
-        const nextIndex = keys.indexOf(l) +1;
-        if (nextIndex < keys.length) {
-          const nextLetter = keys[nextIndex];
-          setTimeout(() => {
-            resolve(showAlphabet(nextLetter, 0));          
-          }, 250);
-        }
-      }
-    });
+function showAlphabet(l, i, next, args) {
+  lights[i].write(letters[l][i], err => {
+    if (err) {
+      throw err;
+    }
+    i += 1;
+    if (i < lights.length) {
+      showAlphabet(l, i);
+    } else {
+      const keys = Object.keys(letters);
+      const nextIndex = keys.indexOf(l) +1;
+      if (nextIndex < keys.length) {
+        const nextLetter = keys[nextIndex];
+        setTimeout(() => {
+          showAlphabet(nextLetter, 0);          
+        }, 1000);
+      } else if (next && typeof next === 'function') {
+        next(...args);
+      } 
+    }
   });
 }
 
@@ -111,8 +112,5 @@ function cleanUp() {
 // setTimeout(() => {
 //   cleanUp();
 // }, 30000);
-showAlphabet('a', 0)
-  .then(() => cleanUp())
-  .catch(err => {
-    throw err;
-  });
+
+cycleLedAsync(0, showAlphabet, ['a', 0, cleanUp]);
