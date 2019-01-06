@@ -87,9 +87,7 @@ function showLetter(l) {
 }
 
 function showAlphabet() {
-  letters.a.forEach((v, i) => {
-    lights[i].writeSync(v);
-  });
+  showLetter('a');
 }
 
 function cleanUp() {
