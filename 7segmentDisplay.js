@@ -81,24 +81,23 @@ function cycleLedAsync(i) {
 }
 
 function showLetter(l, i) {
-	console.log("​showLetter -> l, i", l, i)
-  setTimeout(() => {
-    lights[i].write(letters[l][i], err => {
-      if (err) {
-        throw err;
-      }
-      i += 1;
-      if (i < lights.length) {
-        showLetter(l, i);
-      }
-    });
-  }, 250);
+	console.log("​showLetter -> l, i", l, i);
+  lights[i].write(letters[l][i], err => {
+    if (err) {
+      throw err;
+    }
+    i += 1;
+    if (i < lights.length) {
+      showLetter(l, i);
+    }
+  });
 }
 
 function showAlphabet() {
-  Object.keys(letters).forEach(v => {
-    showLetter(v, 0);    
-  });
+  showLetter('a', 0);
+  // Object.keys(letters).forEach(v => {
+  //   showLetter(v, 0);    
+  // });
 }
 
 function cleanUp() {
