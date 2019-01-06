@@ -81,26 +81,22 @@ function cycleLedAsync(i) {
 }
 
 function showLetter(l, i) {
-  lights[i].write(letters[l][i], err => {
-    if (err) {
-      throw err;
-    }
-    i += 1;
-    if (i < lights.length) {
-      showLetter(l, i);
-    }
-  });
+  setTimeout(() => {
+    lights[i].write(letters[l][i], err => {
+      if (err) {
+        throw err;
+      }
+      i += 1;
+      if (i < lights.length) {
+        showLetter(l, i);
+      }
+    });
+  }, 250);
 }
 
 function showAlphabet() {
   Object.keys(letters).forEach(v => {
-    if (v === 'a') {
-      showLetter(v, 0);
-    } else {
-      setTimeout(() => {
-        showLetter(v, 0);
-      }, 250);
-    }
+    showLetter(v, 0);    
   });
 }
 
