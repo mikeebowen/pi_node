@@ -110,7 +110,7 @@ function cleanUp() {
 // cycleLed(0);
 // cycleLedAsync(0);
 // showAlphabet();
-Promise.resolve(showAlphabet());
+showAlphabet();
 setTimeout(() => {
   cleanUp();
 }, 30000);
