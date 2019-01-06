@@ -39,7 +39,7 @@ const letters = {
   w: [0, 0, 1, 1, 1, 0, 0, 0],
   x: [0, 1, 1, 0, 1, 1, 1, 0],
   y: [0, 1, 1, 1, 0, 1, 1, 0],
-  z: [1, 1, 0, 1, 1, 0, 1, 0]
+  z: [1, 0, 1, 1, 0, 1, 1, 0]
 };
 
 function cycleLed(i) {
@@ -73,32 +73,25 @@ function cycleLedAsync(i) {
   });
 }
 
-function showLetter(l, i) {
+function showAlphabet(l, i) {
   lights[i].write(letters[l][i], err => {
     if (err) {
       throw err;
     }
     i += 1;
     if (i < lights.length) {
-      showLetter(l, i);
+      showAlphabet(l, i);
     } else {
       const keys = Object.keys(letters);
       const nextIndex = keys.indexOf(l) +1;
       if (nextIndex < keys.length) {
         const nextLetter = keys[nextIndex];
         setTimeout(() => {
-          showLetter(nextLetter, 0);          
-        }, 1000);
+          showAlphabet(nextLetter, 0);          
+        }, 250);
       }
     }
   });
-}
-
-function showAlphabet() {
-  showLetter('a', 0);
-  // Object.keys(letters).forEach(v => {
-  //   showLetter(v, 0);    
-  // });
 }
 
 function cleanUp() {
@@ -111,7 +104,7 @@ function cleanUp() {
 // cycleLed(0);
 // cycleLedAsync(0);
 // showAlphabet();
-showAlphabet();
+showAlphabet('a', 0);
 setTimeout(() => {
   cleanUp();
 }, 30000);
