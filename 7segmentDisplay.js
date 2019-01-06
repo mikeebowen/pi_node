@@ -24,8 +24,9 @@ function cycleLed(i) {
   lights[i].writeSync(1);
   setTimeout(() => {
     lights[i].writeSync(0);
+    i += 1;
     if (i < lights.length) {
-      cycleLed(i++);
+      cycleLed(i);
     }
   }, 1000);
 }
