@@ -21,21 +21,13 @@ const lights = [e, d, c, dp, g, f, a, b];
 // });
 
 function cycleLed(i) {
-  lights[i].write(1, err => {
-    if (err) {
-      throw err;
+  lights[i].writeSync(1);
+  setTimeout(() => {
+    lights[i].writeSync(0);
+    if (i < lights.length) {
+      cycleLed(i++);
     }
-    setTimeout(() => {
-      lights[i].write(0, err => {
-        if (err) {
-          throw err;
-        }
-        if (i < lights.length) {
-          cycleLed(i++);
-        }
-      });
-    }, 1000);
-  });
+  }, 1000);
 }
 
 cycleLed(0);
