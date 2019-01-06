@@ -74,24 +74,27 @@ function cycleLedAsync(i) {
 }
 
 function showAlphabet(l, i) {
-  lights[i].write(letters[l][i], err => {
-    if (err) {
-      throw err;
-    }
-    i += 1;
-    if (i < lights.length) {
-      showAlphabet(l, i);
-    } else {
-      const keys = Object.keys(letters);
-      const nextIndex = keys.indexOf(l) +1;
-      if (nextIndex < keys.length) {
-        const nextLetter = keys[nextIndex];
-        setTimeout(() => {
-          showAlphabet(nextLetter, 0);          
-        }, 1000);
+  return new Promise((resolve, reject) => {
+
+    lights[i].write(letters[l][i], err => {
+      if (err) {
+        reject(err);
       }
-    }
-  });
+      i += 1;
+      if (i < lights.length) {
+        resolve(showAlphabet(l, i));
+      } else {
+        const keys = Object.keys(letters);
+        const nextIndex = keys.indexOf(l) +1;
+        if (nextIndex < keys.length) {
+          const nextLetter = keys[nextIndex];
+          setTimeout(() => {
+            resolve(showAlphabet(nextLetter, 0));          
+          }, 1000);
+        }
+      }
+    });
+  })
 }
 
 function cleanUp() {
@@ -108,5 +111,5 @@ function cleanUp() {
 // setTimeout(() => {
 //   cleanUp();
 // }, 30000);
-Promise.resolve(showAlphabet('a', 0))
+showAlphabet('a', 0)
   .then(() => cleanUp());
