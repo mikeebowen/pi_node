@@ -111,6 +111,7 @@ function cycleLedAsync(i) {
 
 function showLetter(l, i) {
 	console.log("​showLetter -> l, i", l, i);
+  console.log("​showLetter -> letters.length", letters.length)
   lights[i].write(letters[l][i], err => {
     if (err) {
       throw err;
