@@ -53,7 +53,7 @@ function cycleLed(i) {
   }, 1000);
 }
 
-function cycleLedAsync(i, next, args) {
+function cycleLedAsync(i) {
   lights[i].write(1, err => {
     if (err) {
       console.error(err);
@@ -67,15 +67,15 @@ function cycleLedAsync(i, next, args) {
         i += 1;
         if (i < lights.length) {
           cycleLedAsync(i);
-        } else if (next && typeof next === 'function') {
-          next(...args);
+        } else {
+          showAlphabet('a', 0);
         }
       });
-    }, 500);
+    }, 250);
   });
 }
 
-function showAlphabet(l, i, next, args) {
+function showAlphabet(l, i) {
   lights[i].write(letters[l][i], err => {
     if (err) {
       throw err;
@@ -90,10 +90,10 @@ function showAlphabet(l, i, next, args) {
         const nextLetter = keys[nextIndex];
         setTimeout(() => {
           showAlphabet(nextLetter, 0);          
-        }, 1000);
-      } else if (next && typeof next === 'function') {
-        next(...args);
-      } 
+        }, 250);
+      } else {
+        cleanUp();
+      }
     }
   });
 }
@@ -106,11 +106,9 @@ function cleanUp() {
 }
 
 // cycleLed(0);
-// cycleLedAsync(0);
+cycleLedAsync(0);
 // showAlphabet();
 // showAlphabet('a', 0);
 // setTimeout(() => {
 //   cleanUp();
 // }, 30000);
-
-cycleLedAsync(0, showAlphabet, ['a', 0, cleanUp]);
