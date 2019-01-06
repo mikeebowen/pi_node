@@ -110,8 +110,6 @@ function cycleLedAsync(i) {
 }
 
 function showLetter(l, i) {
-	console.log("​showLetter -> l, i", l, i);
-  console.log("​showLetter -> letters.length", letters.length)
   lights[i].write(letters[l][i], err => {
     if (err) {
       throw err;
@@ -122,9 +120,9 @@ function showLetter(l, i) {
     } else {
       const keys = Object.keys(letters);
       const nextIndex = keys.indexOf(l) +1;
-      console.log("​showLetter -> letters.length", letters.length)
+      console.log("​showLetter -> keys.length", keys.length)
       console.log("​showLetter -> nextIndex", nextIndex)
-      if (nextIndex < letters.length) {
+      if (nextIndex < keys.length) {
         const nextLetter = keys[nextIndex];
         showLetter(nextLetter, 0);
       }
