@@ -80,9 +80,15 @@ function cycleLedAsync(i) {
   });
 }
 
-function showLetter(l) {
-  letters[l].forEach((v, i) => {
-    lights[i].writeSync(v);
+function showLetter(l, i) {
+  lights[i].write(letters[l][i], err => {
+    if (err) {
+      throw err;
+    }
+    i += 1;
+    if (i < lights.length) {
+      showLetter(l, i);
+    }
   });
 }
 
