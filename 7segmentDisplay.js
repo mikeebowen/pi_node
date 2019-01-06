@@ -90,11 +90,11 @@ function showAlphabet(l, i) {
           const nextLetter = keys[nextIndex];
           setTimeout(() => {
             resolve(showAlphabet(nextLetter, 0));          
-          }, 1000);
+          }, 250);
         }
       }
     });
-  })
+  });
 }
 
 function cleanUp() {
@@ -112,4 +112,7 @@ function cleanUp() {
 //   cleanUp();
 // }, 30000);
 showAlphabet('a', 0)
-  .then(() => cleanUp());
+  .then(() => cleanUp())
+  .catch(err => {
+    throw err;
+  });
