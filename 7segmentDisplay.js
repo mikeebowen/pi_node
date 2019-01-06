@@ -121,6 +121,8 @@ function showLetter(l, i) {
     } else {
       const keys = Object.keys(letters);
       const nextIndex = keys.indexOf(l) +1;
+      console.log("​showLetter -> letters.length", letters.length)
+      console.log("​showLetter -> nextIndex", nextIndex)
       if (nextIndex < letters.length) {
         const nextLetter = keys[nextIndex];
         showLetter(nextLetter, 0);
