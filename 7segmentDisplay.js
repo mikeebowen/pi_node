@@ -14,6 +14,16 @@ const dot = new Gpio(12, 'out');
 const lights = [top, tr, br, btm, bl, tl, ctr, dot];
 
 const letters = {
+  0: [1, 1, 1, 1, 1, 1, 0, 0],
+  1: [0, 1, 1, 0, 0, 0, 0, 0],
+  2: [1, 1, 0, 1, 1, 0, 1, 0],
+  3: [1, 1, 1, 1, 0, 0, 1, 0],
+  4: [0, 1, 1, 0, 0, 1, 1, 0],
+  5: [1, 0, 1, 1, 0, 1, 1, 0],
+  6: [0, 0, 1, 1, 1, 1, 1, 0],
+  7: [1, 1, 1, 0, 0, 0, 0, 0],
+  8: [1, 1, 1, 1, 1, 1, 1, 0],
+  9: [1, 1, 1, 1, 0, 1, 1, 0],
   a: [1, 1, 1, 0, 1, 1, 1, 0],
   b: [0, 0, 1, 1, 1, 1, 1, 0],
   c: [1, 0, 0, 1, 1, 1, 0, 0],
@@ -41,17 +51,6 @@ const letters = {
   y: [0, 1, 1, 1, 0, 1, 1, 0],
   z: [1, 1, 0, 1, 1, 0, 1, 0]
 };
-
-function cycleLed(i) {
-  lights[i].writeSync(1);
-  setTimeout(() => {
-    lights[i].writeSync(0);
-    i += 1;
-    if (i < lights.length) {
-      cycleLed(i);
-    }
-  }, 1000);
-}
 
 function cycleLedAsync(i) {
   lights[i].write(1, err => {
@@ -105,10 +104,4 @@ function cleanUp() {
   });
 }
 
-// cycleLed(0);
 cycleLedAsync(0);
-// showAlphabet();
-// showAlphabet('a', 0);
-// setTimeout(() => {
-//   cleanUp();
-// }, 30000);
