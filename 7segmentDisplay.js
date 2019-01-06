@@ -13,12 +13,32 @@ const b = new Gpio(21, 'out');
 
 const lights = [e, d, c, dp, g, f, a, b];
 
-lights.forEach(x => {
-  x.writeSync(1);
-  setTimeout(() => {
-    x.writeSync(0);
-  }, 1000);
-});
+// lights.forEach(x => {
+//   x.writeSync(1);
+//   setTimeout(() => {
+//     x.writeSync(0);
+//   }, 1000);
+// });
+
+function cycleLed(i) {
+  lights[i].write(1, err => {
+    if (err) {
+      throw err;
+    }
+    setTimeout(() => {
+      lights[i].write(0, err => {
+        if (err) {
+          throw err;
+        }
+        if (i < lights.length) {
+          cycleLed(i++);
+        }
+      });
+    }, 1000);
+  });
+}
+
+cycleLed(0);
 
 setTimeout(() => {
   lights.forEach(x => {
