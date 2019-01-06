@@ -93,7 +93,15 @@ function showLetter(l, i) {
 }
 
 function showAlphabet() {
-  showLetter('a', 0);
+  letters.keys().forEach(v => {
+    if (v === 'a') {
+      showLetter(v, 0);
+    } else {
+      setTimeout(() => {
+        showLetter(v, 0);
+      }, 250);
+    }
+  });
 }
 
 function cleanUp() {
