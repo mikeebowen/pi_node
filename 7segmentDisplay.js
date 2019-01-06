@@ -124,7 +124,9 @@ function showLetter(l, i) {
       console.log("​showLetter -> nextIndex", nextIndex)
       if (nextIndex < keys.length) {
         const nextLetter = keys[nextIndex];
-        showLetter(nextLetter, 0);
+        setTimeout(() => {
+          showLetter(nextLetter, 0);          
+        }, 250);
       }
     }
   });
