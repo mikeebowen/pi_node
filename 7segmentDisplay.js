@@ -93,7 +93,7 @@ function showLetter(l, i) {
 }
 
 function showAlphabet() {
-  letters.keys().forEach(v => {
+  Object.keys(letters).forEach(v => {
     if (v === 'a') {
       showLetter(v, 0);
     } else {
