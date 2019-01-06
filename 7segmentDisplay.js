@@ -82,11 +82,7 @@ function cycleLedAsync(i) {
 
 function showLetter(l) {
   letters[l].forEach((v, i) => {
-    lights[i].write(v, err => {
-      if (err) {
-        throw err;
-      }
-    });
+    lights[i].writeSync(v);
   });
 }
 
