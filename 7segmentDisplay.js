@@ -87,15 +87,9 @@ function showLetter(l) {
 }
 
 function showAlphabet() {
-  for (let letter in letters) {
-    if (letter === 'a') {
-      showLetter(letter);
-    } else {
-      setTimeout(() => {
-        showLetter(letter);      
-      }, 250);
-    }
-  }
+  letters.a.forEach((v, i) => {
+    lights[i].writeSync(v);
+  });
 }
 
 function cleanUp() {
