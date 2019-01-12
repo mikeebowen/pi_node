@@ -36,4 +36,13 @@ function showLight(i) {
   });
 }
 
-showLight(0);
+// showLight(0);
+lights[0].write(1, err => {
+  if (err) throw err;
+
+  setTimeout(() => {
+    lights[0].write(0, err => {
+      if (err) throw err;
+    });
+  }, 5000);
+});
