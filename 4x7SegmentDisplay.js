@@ -88,12 +88,29 @@ function showLight(i) {
 //   }, 5000);
 // });
 
-lights.forEach(el => {
-  el.writeSync(1);
-});
+function writeNumSync(i, pinIndex, pins) {
+  pins.forEach((p, j) => {
+    const bitVal = j === pinIndex ? 1 : 0;
+    p.writeSync(bitVal);
+  });
+
+  letters[i].forEach((bit, ii) => {
+    lights[ii].writeSync(1);
+  });
+}
+
+writeNumSync(0, 0, pins);
+writeNumSync(1, 1, pins);
+writeNumSync(2, 2, pins);
+writeNumSync(3, 3, pins);
 
 setTimeout(() => {
-  lights.forEach(el => {
+  pins.forEach(el => {
     el.writeSync(0);
   });
-}, 3000);
+}, 10000);
+
+process.on('SIGINT', () => {
+  console.log('signal interrupted');
+  process.exit();
+});
