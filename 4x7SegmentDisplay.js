@@ -95,7 +95,7 @@ function showLight(i) {
 
 function writeNumSync(i, pinIndex, pins) {
   pins.forEach((p, j) => {
-    const bitVal = j === pinIndex ? 1 : 0;
+    const bitVal = j === pinIndex ? 0 : 1;
     p.writeSync(bitVal);
   });
 
@@ -106,9 +106,9 @@ function writeNumSync(i, pinIndex, pins) {
 
 function loop() {
   writeNumSync(0, 0, negateNums);
-  // writeNumSync(1, 1, negateNums);
-  // writeNumSync(2, 2, negateNums);
-  // writeNumSync(3, 3, negateNums);
+  writeNumSync(1, 1, negateNums);
+  writeNumSync(2, 2, negateNums);
+  writeNumSync(3, 3, negateNums);
 }
 
 loop();
