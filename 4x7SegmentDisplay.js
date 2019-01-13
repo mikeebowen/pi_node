@@ -77,7 +77,7 @@ function showLight(i) {
   });
 }
 
-showLight(0);
+// showLight(0);
 // lights[0].write(1, err => {
 //   if (err) throw err;
 
@@ -87,3 +87,13 @@ showLight(0);
 //     });
 //   }, 5000);
 // });
+
+lights.forEach(el => {
+  el.writeSync(1);
+});
+
+setTimeout(() => {
+  lights.forEach(el => {
+    el.writeSync(0);
+  });
+}, 3000);
