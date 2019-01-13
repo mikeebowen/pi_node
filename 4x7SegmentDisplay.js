@@ -59,6 +59,10 @@ const letters = {
   z: [1, 1, 0, 1, 1, 0, 1, 0]
 };
 
+pins.forEach(el => {
+  el.writeSync(0);
+});
+
 function showLight(i) {
   lights[i].write(1, err => {
     if (err) {
@@ -102,9 +106,9 @@ function writeNumSync(i, pinIndex, pins) {
 
 function loop() {
   writeNumSync(0, 0, negateNums);
-  writeNumSync(1, 1, negateNums);
-  writeNumSync(2, 2, negateNums);
-  writeNumSync(3, 3, negateNums);
+  // writeNumSync(1, 1, negateNums);
+  // writeNumSync(2, 2, negateNums);
+  // writeNumSync(3, 3, negateNums);
 }
 
 loop();
