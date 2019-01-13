@@ -15,6 +15,7 @@ const not2nd = new Gpio(25, 'out');
 const not3rd = new Gpio(12, 'out');
 const tr = new Gpio(16, 'out');
 
+const pins = [bl, btm, dot, br, ctr, not4th, tl, not1st, top, not2nd, not3rd, tr];
 const negateNums = [not1st, not2nd, not3rd, not4th];
 
 const lights = [top, tr, br, btm, bl, tl, ctr, dot];
@@ -105,7 +106,7 @@ writeNumSync(2, 2, negateNums);
 writeNumSync(3, 3, negateNums);
 
 setTimeout(() => {
-  negateNums.forEach(el => {
+  pins.forEach(el => {
     el.writeSync(0);
   });
 }, 10000);
