@@ -93,7 +93,7 @@ function showLight(i) {
 //   }, 5000);
 // });
 
-function writeNumSync(i, pinIndex, pins) {
+function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
   pins.forEach((p, j) => {
     const bitVal = j === pinIndex ? 0 : 1;
     p.writeSync(bitVal);
@@ -102,6 +102,12 @@ function writeNumSync(i, pinIndex, pins) {
   letters[i].forEach((bit, ii) => {
     lights[ii].writeSync(bit);
   });
+
+  pinIndex += 1;
+  i += 1;
+  if (pinIndex < 3) {
+    writeNumSync(i, pinIndex, negateNums); 
+  }
 }
 
 function loop() {
@@ -110,7 +116,7 @@ function loop() {
   }
 }
 
-setInterval(loop, 10);
+const lightInterval = setInterval(writeNumSync, 10);
 
 // setTimeout(() => {
 //   pins.forEach(el => {
@@ -120,6 +126,7 @@ setInterval(loop, 10);
 
 process.on('SIGINT', () => {
   console.log('signal interrupted');
+  clearInterval(lightInterval);
   pins.forEach(el => {
     el.writeSync(0);
   });
