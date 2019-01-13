@@ -100,18 +100,25 @@ function writeNumSync(i, pinIndex, pins) {
   });
 }
 
-writeNumSync(0, 0, negateNums);
-writeNumSync(1, 1, negateNums);
-writeNumSync(2, 2, negateNums);
-writeNumSync(3, 3, negateNums);
+function loop() {
+  writeNumSync(0, 0, negateNums);
+  writeNumSync(1, 1, negateNums);
+  writeNumSync(2, 2, negateNums);
+  writeNumSync(3, 3, negateNums);
+}
 
-setTimeout(() => {
-  pins.forEach(el => {
-    el.writeSync(0);
-  });
-}, 10000);
+loop();
+
+// setTimeout(() => {
+//   pins.forEach(el => {
+//     el.writeSync(0);
+//   });
+// }, 10000);
 
 process.on('SIGINT', () => {
   console.log('signal interrupted');
+  pins.forEach(el => {
+    el.writeSync(0);
+  });
   process.exit();
 });
