@@ -95,7 +95,7 @@ function writeNumSync(i, pinIndex, pins) {
   });
 
   letters[i].forEach((bit, ii) => {
-    lights[ii].writeSync(1);
+    lights[ii].writeSync(bit);
   });
 }
 
