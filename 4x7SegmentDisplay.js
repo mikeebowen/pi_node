@@ -105,10 +105,12 @@ function writeNumSync(i, pinIndex, pins) {
 }
 
 function loop() {
-  writeNumSync(0, 0, negateNums);
-  writeNumSync(1, 1, negateNums);
-  writeNumSync(2, 2, negateNums);
-  writeNumSync(3, 3, negateNums);
+  while(true) {
+    writeNumSync(0, 0, negateNums);
+    writeNumSync(1, 1, negateNums);
+    writeNumSync(2, 2, negateNums);
+    writeNumSync(3, 3, negateNums);
+  }
 }
 
 loop();
