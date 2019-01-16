@@ -101,7 +101,8 @@ function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
 
   letters[i].forEach((bit, ii) => {
     lights[ii].writeSync(bit);
-  });
+
+});
 
   pinIndex += 1;
   i += 1;
@@ -116,7 +117,30 @@ function loop() {
   }
 }
 
-const lightInterval = setInterval(writeNumSync, 10);
+function getTime() {
+  const d = new Date();
+  return (('00' + d.getHours().toString()).substr(-2, 2) + ('00' + d.getMinutes().toString()).substr(-2, 2)).split('').map(n => parseInt(n));
+}
+
+// const lightInterval = setInterval(writeNumSync, 10);
+let index = 0;
+const lightInterval = setInterval(() => {
+  const time = getTime();
+	console.log(time);
+	console.log('index: ', index);
+  letters[time[index]].forEach((bit, ii) => {
+    lights[ii].writeSync(bit);
+  });
+  negateNums.forEach((p, j) => {
+    const bitVal = j === index ? 0 : 1;
+    p.writeSync(bitVal);
+  });
+  if (index < negateNums.length - 1) {
+    index += 1;
+  } else {
+    index = 0;
+  }
+}, 1);
 
 // setTimeout(() => {
 //   pins.forEach(el => {
