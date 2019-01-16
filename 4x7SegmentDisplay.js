@@ -84,7 +84,7 @@ function showLight(i) {
 
 function writeNumSync(time) {
   letters[time[index]].forEach((bit, ii) => {
-    bit = ii === 1 ? 1 : bit;
+    bit = ii === letters.length - 1 ? 1 : bit;
 		console.log("​writeNumSync -> ii", ii)
 		console.log("​writeNumSync -> bit", bit)
     lights[ii].writeSync(bit);
