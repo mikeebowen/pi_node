@@ -137,7 +137,7 @@ function loop() {
 
 function getTime() {
   const d = new Date();
-  return (d.getHours().toString() + ('00' + d.getMinutes().toString()).substr(-4,4)).split('').map(n => parseInt(n));
+  return (('00' + d.getHours().toString()).substr(-2, 2) + ('00' + d.getMinutes().toString()).substr(-2, 2)).split('').map(n => parseInt(n));
 }
 
 // const lightInterval = setInterval(writeNumSync, 10);
