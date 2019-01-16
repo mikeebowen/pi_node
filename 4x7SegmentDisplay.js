@@ -100,7 +100,7 @@ function writeNumSync(time) {
 
 function printTime() {
   const time = getTime();
-  printTime(time);
+  writeNumSync(time);
 }
 
 function getTime() {
