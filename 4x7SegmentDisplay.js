@@ -142,10 +142,14 @@ const lightInterval = setInterval(() => {
   letters[index].forEach((bit, ii) => {
     lights[ii].writeSync(bit);
   });
-  negateNums.forEach((p, j) => {
-    const bitVal = j === index ? 0 : 1;
-    p.writeSync(bitVal);
-  });
+  negateNums[index].writeSync(0);
+  setTimeout(() => {
+    negateNums[index].writeSync(1);
+  }, 1);
+  // negateNums.forEach((p, j) => {
+  //   const bitVal = j === index ? 0 : 1;
+  //   p.writeSync(bitVal);
+  // });
   if (index < negateNums.length) {
     index += 1;
   } else {
