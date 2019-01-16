@@ -82,69 +82,9 @@ function showLight(i) {
   });
 }
 
-// showLight(0);
-// lights[0].write(1, err => {
-//   if (err) throw err;
-
-//   setTimeout(() => {
-//     lights[0].write(0, err => {
-//       if (err) throw err;
-//     });
-//   }, 5000);
-// });
-
-function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
-  pins.forEach((p, j) => {
-    const bitVal = j === pinIndex ? 0 : 1;
-    p.writeSync(bitVal);
-  });
-
-  letters[i].forEach((bit, ii) => {
-    lights[ii].writeSync(bit);
-  });
-  for (let i = 0; i < pins.length; i++) {
-    if (i < 3) {
-      writeNumSync(i, i, negateNums); 
-    } else {
-      writeNumSync(0, 0, negateNums)
-    }
-  }
-  // pinIndex += 1;
-  // i += 1;
-  // if (pinIndex < 3) {
-  //   writeNumSync(i, pinIndex, negateNums); 
-  // } else {
-  //   writeNumSync(0, 0, negateNums)
-  // }
-}
-
-function loop() {
-  while(true) {
-    setTimeout(() => {
-      writeNumSync(0, 0, negateNums);
-      setTimeout(() => {
-        writeNumSync(1, 1, negateNums);
-        setTimeout(() => {
-          writeNumSync(2, 2, negateNums);
-          setTimeout(() => {
-            writeNumSync(3, 3, negateNums);            
-          }, 1000);
-        }, 1000);
-      }, 1000);
-    }, 1000);
-  }
-}
-
-function getTime() {
-  const d = new Date();
-  return (('00' + d.getHours().toString()).substr(-2, 2) + ('00' + d.getMinutes().toString()).substr(-2, 2)).split('').map(n => parseInt(n));
-}
-
-// const lightInterval = setInterval(writeNumSync, 10);
-let index = 0;
-const lightInterval = setInterval(() => {
-  const time = getTime();
+function writeNumSync(time) {
   letters[time[index]].forEach((bit, ii) => {
+    bit = ii === 1 ? 1 : bit;
     lights[ii].writeSync(bit);
   });
   negateNums.forEach((p, j) => {
@@ -156,13 +96,21 @@ const lightInterval = setInterval(() => {
   } else {
     index = 0;
   }
-}, 1);
+}
 
-// setTimeout(() => {
-//   pins.forEach(el => {
-//     el.writeSync(0);
-//   });
-// }, 10000);
+function printTime() {
+  const time = getTime();
+  printTime(time);
+}
+
+function getTime() {
+  const d = new Date();
+  return (('00' + d.getHours().toString()).substr(-2, 2) + ('00' + d.getMinutes().toString()).substr(-2, 2)).split('').map(n => parseInt(n));
+}
+
+// const lightInterval = setInterval(writeNumSync, 10);
+let index = 0;
+const lightInterval = setInterval(printTime, 1);
 
 process.on('SIGINT', () => {
   console.log('signal interrupted');
