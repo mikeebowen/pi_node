@@ -138,20 +138,20 @@ function loop() {
 // const lightInterval = setInterval(writeNumSync, 10);
 let index = 0;
 const lightInterval = setInterval(() => {
+  
+  letters[index].forEach((bit, ii) => {
+    lights[ii].writeSync(bit);
+  });
   negateNums.forEach((p, j) => {
     const bitVal = j === index ? 0 : 1;
     p.writeSync(bitVal);
-  });
-
-  letters[index].forEach((bit, ii) => {
-    lights[ii].writeSync(bit);
   });
   if (index < negateNums.length) {
     index += 1;
   } else {
     index = 0;
   }
-}, 10);
+}, 1);
 
 // setTimeout(() => {
 //   pins.forEach(el => {
