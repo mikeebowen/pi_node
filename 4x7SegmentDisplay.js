@@ -103,11 +103,13 @@ function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
     lights[ii].writeSync(bit);
   });
 
-  pinIndex += 1;
-  i += 1;
-  if (pinIndex < 3) {
-    writeNumSync(i, pinIndex, negateNums); 
-  }
+  setTimeout(() => {
+    pinIndex += 1;
+    i += 1;
+    if (pinIndex < 3) {
+      writeNumSync(i, pinIndex, negateNums); 
+    }
+  }, 10);
 }
 
 function loop() {
@@ -127,7 +129,8 @@ function loop() {
   }
 }
 
-const lightInterval = setInterval(writeNumSync, 10);
+// const lightInterval = setInterval(writeNumSync, 10);
+writeNumSync();
 
 // setTimeout(() => {
 //   pins.forEach(el => {
