@@ -83,15 +83,13 @@ function showLight(i) {
 }
 
 function writeNumSync(time) {
-  letters[time[index]].forEach((bit, ii) => {
-    bit = ii === letters.length - 1 ? 1 : bit;
-		console.log("​writeNumSync -> ii", ii)
-		console.log("​writeNumSync -> bit", bit)
-    lights[ii].writeSync(bit);
-  });
   negateNums.forEach((p, j) => {
     const bitVal = j === index ? 0 : 1;
     p.writeSync(bitVal);
+  });
+  letters[time[index]].forEach((bit, ii) => {
+    bit = ii === letters.length - 1 ? 1 : bit;
+    lights[ii].writeSync(bit);
   });
   if (index < negateNums.length - 1) {
     index += 1;
