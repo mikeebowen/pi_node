@@ -102,14 +102,20 @@ function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
   letters[i].forEach((bit, ii) => {
     lights[ii].writeSync(bit);
   });
-
-  pinIndex += 1;
-  i += 1;
-  if (pinIndex < 3) {
-    writeNumSync(i, pinIndex, negateNums); 
-  } else {
-    writeNumSync(0, 0, negateNums)
+  for (let i = 0; i < pins.length; i++) {
+    if (i < 3) {
+      writeNumSync(i, i, negateNums); 
+    } else {
+      writeNumSync(0, 0, negateNums)
+    }
   }
+  // pinIndex += 1;
+  // i += 1;
+  // if (pinIndex < 3) {
+  //   writeNumSync(i, pinIndex, negateNums); 
+  // } else {
+  //   writeNumSync(0, 0, negateNums)
+  // }
 }
 
 function loop() {
