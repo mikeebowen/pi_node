@@ -135,11 +135,16 @@ function loop() {
   }
 }
 
+function getTime() {
+  const d = new Date();
+  return (d.getHours().toString() + d.getMinutes().toString()).split('').map(n => parseInt(n));
+}
+
 // const lightInterval = setInterval(writeNumSync, 10);
 let index = 0;
 const lightInterval = setInterval(() => {
-  
-  letters[index].forEach((bit, ii) => {
+  const time = getTime();
+  letters[time[index]].forEach((bit, ii) => {
     lights[ii].writeSync(bit);
   });
   negateNums.forEach((p, j) => {
