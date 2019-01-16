@@ -111,8 +111,19 @@ function writeNumSync(i = 0, pinIndex = 0, pins = negateNums) {
 }
 
 function loop() {
-  for (let i = 0; i < 4; i++) {
-    writeNumSync(i, i, negateNums);
+  while(true) {
+    setTimeout(() => {
+      writeNumSync(0, 0, negateNums);
+      setTimeout(() => {
+        writeNumSync(1, 1, negateNums);
+        setTimeout(() => {
+          writeNumSync(2, 2, negateNums);
+          setTimeout(() => {
+            writeNumSync(3, 3, negateNums);            
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 }
 
