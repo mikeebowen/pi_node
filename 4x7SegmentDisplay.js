@@ -128,10 +128,12 @@ showTempAndHumidity();
 // const lightInterval = setInterval(writeNumSync, 10);
 let index = 0;
 // const lightInterval = setInterval(printTime, 1);
+const tempInterval = setInterval(showTempAndHumidity, 1);
 
 process.on('SIGINT', () => {
     console.log('signal interrupted');
-    clearInterval(lightInterval);
+    // clearInterval(lightInterval);
+    clearInterval(tempInterval);
     pins.forEach((el) => {
         el.writeSync(0);
     });
