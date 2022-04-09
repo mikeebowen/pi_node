@@ -88,7 +88,9 @@ function writeStringSync(str) {
         const bitVal = j === index ? 0 : 1;
         p.writeSync(bitVal);
     });
-
+    console.log('str: ', str);
+    console.log('index: ', index);
+    console.log('str[index]: ', str[index]);
     if (index < str.length - 1) {
         letters[str[index]].forEach((bit, ii) => {
             // bit = ii === letters.length - 1 ? 1 : bit;
