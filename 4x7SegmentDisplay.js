@@ -121,9 +121,9 @@ async function showTempAndHumidity() {
         const res = await sensor.read(11, 21);
         console.log(`temp: ${res.temperature.toFixed(1)}°C, ` + `humidity: ${res.humidity.toFixed(1)}%`);
 
-        writeStringSync(`${res.temperature.toFixed(1).toString()}c`);
+        writeStringSync(`${Math.max(res.temperature).toString()}c`);
 
-        const temp = (res.temperature.toFixed(0) - 32) * (5 / 9);
+        const temp = (Math.max(res.temperature) - 32) * (5 / 9);
         setTimeout(() => {
             writeStringSync(`${temp.toString()}f`);
         }, 1000);
