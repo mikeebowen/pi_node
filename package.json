@@ -17,6 +17,6 @@
   },
   "homepage": "https://gitlab.com/mrbgit/raspberry-pi-practice#readme",
   "dependencies": {
-    "onoff": "^3.2.2"
+    "onoff": "^6.0.3"
   }
 }
