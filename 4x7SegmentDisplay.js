@@ -89,7 +89,7 @@ function writeStringSync(str) {
         p.writeSync(bitVal);
     });
 
-    if (str[index]) {
+    if (index < str.length - 1) {
         letters[str[index]].forEach((bit, ii) => {
             // bit = ii === letters.length - 1 ? 1 : bit;
             lights[ii].writeSync(bit);
