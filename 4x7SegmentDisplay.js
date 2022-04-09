@@ -88,10 +88,14 @@ function writeStringSync(str) {
         const bitVal = j === index ? 0 : 1;
         p.writeSync(bitVal);
     });
-    letters[str[index]].forEach((bit, ii) => {
-        // bit = ii === letters.length - 1 ? 1 : bit;
-        lights[ii].writeSync(bit);
-    });
+
+    if (str[index]) {
+        letters[str[index]].forEach((bit, ii) => {
+            // bit = ii === letters.length - 1 ? 1 : bit;
+            lights[ii].writeSync(bit);
+        });
+    }
+
     lights[lights.length - 1];
     if (index < negateNums.length - 1) {
         index += 1;
