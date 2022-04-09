@@ -83,12 +83,12 @@ function showLight(i) {
     });
 }
 
-function writeNumSync(time) {
+function writeStringSync(str) {
     negateNums.forEach((p, j) => {
         const bitVal = j === index ? 0 : 1;
         p.writeSync(bitVal);
     });
-    letters[time[index]].forEach((bit, ii) => {
+    letters[str[index]].forEach((bit, ii) => {
         // bit = ii === letters.length - 1 ? 1 : bit;
         lights[ii].writeSync(bit);
     });
@@ -102,7 +102,7 @@ function writeNumSync(time) {
 
 function printTime() {
     const time = getTime();
-    writeNumSync(time);
+    writeStringSync(time);
 }
 
 function getTime() {
@@ -112,20 +112,22 @@ function getTime() {
         .map((n) => parseInt(n));
 }
 
-async function exec() {
+async function showTempAndHumidity() {
     try {
         const res = await sensor.read(11, 21);
         console.log(`temp: ${res.temperature.toFixed(1)}°C, ` + `humidity: ${res.humidity.toFixed(1)}%`);
+
+        writeStringSync('temp');
     } catch (err) {
         console.error('Failed to read sensor data:', err);
     }
 }
 
-exec();
+showTempAndHumidity();
 
 // const lightInterval = setInterval(writeNumSync, 10);
 let index = 0;
-const lightInterval = setInterval(printTime, 1);
+// const lightInterval = setInterval(printTime, 1);
 
 process.on('SIGINT', () => {
     console.log('signal interrupted');
