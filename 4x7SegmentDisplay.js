@@ -91,6 +91,7 @@ function writeStringSync(str) {
     console.log('str: ', str);
     console.log('index: ', index);
     console.log('str[index]: ', str[index]);
+    console.log('letters[str[index]]: ', letters[str[index]]);
     if (index < str.length - 1) {
         letters[str[index]].forEach((bit, ii) => {
             // bit = ii === letters.length - 1 ? 1 : bit;
@@ -126,9 +127,9 @@ async function showTempAndHumidity() {
         writeStringSync(`${Math.round(res.temperature).toString()}c`);
 
         const temp = Math.round((res.temperature * 9) / 5 + 32);
-        setTimeout(() => {
-            writeStringSync(`${temp.toString()}f`);
-        }, 1000);
+        // setTimeout(() => {
+        //     writeStringSync(`${temp.toString()}f`);
+        // }, 1000);
     } catch (err) {
         console.error('Failed to read sensor data:', err);
     }
