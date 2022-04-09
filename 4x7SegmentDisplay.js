@@ -125,7 +125,7 @@ async function showTempAndHumidity() {
 
         writeStringSync(`${Math.max(res.temperature).toString()}c`);
 
-        const temp = Math.max((res.temperature - 32) * (5 / 9));
+        const temp = Math.max((res.temperature * 9) / 5 + 32);
         setTimeout(() => {
             writeStringSync(`${temp.toString()}f`);
         }, 1000);
