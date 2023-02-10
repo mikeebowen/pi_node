@@ -16,5 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo $(FOOBAR)
+    echo $(BAR)
   displayName: 'npm install and build'
+  env:
+    BAR: $(FOOBAR)
